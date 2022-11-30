@@ -38,8 +38,8 @@ public class UserServiceImpl implements UserService {
         if (UserIn.getIsSale() == true){        //Bán
             List<UserDto> matchingObjects = listDto.stream()
                     .filter(p-> p.getNameStock().startsWith(UserIn.getNameStock())
-                    && p.getIsSale() != UserIn.getIsSale()
-                    && p.getStockPrice() >= UserIn.getStockPrice())
+                            && p.getIsSale() != UserIn.getIsSale()
+                            && p.getStockPrice() >= UserIn.getStockPrice())
                     .collect(Collectors.toList());
 
             if (matchingObjects.size() == 0){
@@ -52,10 +52,10 @@ public class UserServiceImpl implements UserService {
 
             UserDto maxObject1  = matchingObjects.stream().max(Comparator.comparing(UserDto::getStockPrice )).get();
             System.out.println(maxObject1);
-            
+
             List<UserDto> maxPriceList = new ArrayList<>();
             for (UserDto user: matchingObjects
-                 ) {
+            ) {
                 if(user.getStockPrice()==maxObject1.getStockPrice()){
                     maxPriceList.add(user);
                 }
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
 //              UserEntity userEntity = userRepository.getById(soonTime.getId());
 //              userEntity.setStockNumber(realStockNumberSale);nameUser = "lang10"
 //              userRepository.save(userEntity);
-               userRepository.updateTable(soonTime.getId(), realStockNumberSale);
+                userRepository.updateTable(soonTime.getId(), realStockNumberSale);
                 userRepository.insertCommandComplete( soonTime.getNameUser(),soonTime.getNameStock(),soonTime.getIsSale(), soonTime.getStockPrice(),UserIn.getStockPrice() ,  soonTime.getStockNumber(),   UserIn.getStockNumber(), soonTime.getTimeCreate());
                 userRepository.insertCommandComplete( UserIn.getNameUser(),UserIn.getNameStock(),UserIn.getIsSale(), UserIn.getStockPrice(),soonTime.getStockPrice() ,  UserIn.getStockNumber() ,  UserIn.getStockNumber() , timestamp);
             }else {
@@ -88,8 +88,8 @@ public class UserServiceImpl implements UserService {
         }else {                                 //Mua
             List<UserDto> matchingObjects = listDto.stream()
                     .filter(p-> p.getNameStock().startsWith(UserIn.getNameStock())
-                    && p.getIsSale() != UserIn.getIsSale()
-                    && p.getStockPrice() <= UserIn.getStockPrice())
+                            && p.getIsSale() != UserIn.getIsSale()
+                            && p.getStockPrice() <= UserIn.getStockPrice())
                     .collect(Collectors.toList());
 
             if (matchingObjects.size() == 0){
@@ -123,6 +123,8 @@ public class UserServiceImpl implements UserService {
                 userRepository.insertCommandComplete( minObject1.getNameUser(),minObject1.getNameStock(),minObject1.getIsSale(), minObject1.getStockPrice(),UserIn.getStockPrice() ,  minObject1.getStockNumber(),   UserIn.getStockNumber(), minObject1.getTimeCreate());
                 userRepository.insertCommandComplete( UserIn.getNameUser(),UserIn.getNameStock(),UserIn.getIsSale(), UserIn.getStockPrice(),minObject1.getStockPrice() ,  UserIn.getStockNumber() ,  UserIn.getStockNumber() , timestamp);
             }
+
+
             return new UserRespond(minObject1, "Khớp lệnh mua");
         }
     }

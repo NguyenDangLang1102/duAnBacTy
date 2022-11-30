@@ -28,7 +28,7 @@ public interface UserRepository extends JpaRepository <UserEntity,Integer>{
 
     @Modifying
     @Transactional
-    @Query(value = "{call PKG_COMMAND.INSERT_COMMAND_COMPLETE(?1,?2,?3,?4,?5,?6,?7,?8) }",nativeQuery = true)
+    @Query(value = "{call PKG_COMMAND_COMPLETE.INSERT_COMMAND_COMPLETE(?1,?2,?3,?4,?5,?6,?7,?8) }",nativeQuery = true)
     void insertCommandComplete(String nameUser, String nameStock, Boolean isSale, Integer stockPrice, Integer realStockPrice, Integer stockNumber, Integer realStockNumber, Timestamp timeCreate);
 
     @Modifying
