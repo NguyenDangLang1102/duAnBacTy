@@ -18,7 +18,6 @@ public interface UserRepository extends JpaRepository <UserEntity,Integer>{
 
     @Procedure(procedureName = "PKG_COMMAND.GET_COMMAND",refCursor = true)
     List<UserEntity> getCommand();
-        //asd
     @Modifying
     @Procedure(name = "command.getbyid")
     UserEntity getbyid(@Param("p_ID") Integer p_ID);
