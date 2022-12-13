@@ -20,10 +20,10 @@ import java.util.Random;
 @Configuration
 @EnableScheduling
 public class BotServiceImpl implements BotService {
-    private static int ratioSell = 0;
-    private static int timeSleep = 0;
-    private static  int desirStockPrice = 0;
-    private static  int times = 0;
+    private static int ratioSell = 0;//ty le ban
+    private static int timeSleep = 0;// tg nghi
+    private static  int desirStockPrice = 0;// gia mong muon
+    private static  int times = 0;// so lan day gia
 
     private static int conditions = 0;
     @Autowired

@@ -14,5 +14,10 @@ import lombok.Setter;
 public class AutoBotIn {
 
     private Integer allBotPrice;
+    private Integer timeSleep;
+    private Integer minStockVolume;
+    private Integer maxStockVolume;
+
+
 
 }
