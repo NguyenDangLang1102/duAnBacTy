@@ -2,8 +2,8 @@ package com.example.demo_get.service.implement;
 
 import com.example.demo_get.model.in.AutoBotIn;
 import com.example.demo_get.model.in.CreatBotIn;
-import com.example.demo_get.model.respond.UserRespond;
-import com.example.demo_get.repostory.UserRepository;
+import com.example.demo_get.model.respond.CommandRespond;
+import com.example.demo_get.repostory.CommandRepository;
 import com.example.demo_get.service.AutobotService;
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +29,10 @@ public class AutoBotServiceImpl implements AutobotService {
     private static int amountBot = 1;
 
     @Autowired
-    private UserRepository userRepository;
+    private CommandRepository commandRepository;
 
     @Override
-    public UserRespond insert(AutoBotIn autoBotIn) {
+    public CommandRespond insert(AutoBotIn autoBotIn) {
         allBotPrice= autoBotIn.getAllBotPrice();
         timeSleep = autoBotIn.getTimeSleep();
         if (autoBotIn.getMinStockVolume() <= autoBotIn.getMaxStockVolume()){
@@ -40,20 +40,20 @@ public class AutoBotServiceImpl implements AutobotService {
             minStockVolume = autoBotIn.getMinStockVolume();
             return null;
         }else {
-            return new UserRespond("Min ?");
+            return new CommandRespond("Min ?");
         }
     }
     @Override
-    public UserRespond creatBot(CreatBotIn creatBotIn) {
+    public CommandRespond creatBot(CreatBotIn creatBotIn) {
         amountBot = creatBotIn.getAmountBot();
         return null;
     }
 
     @Override
-    @Scheduled(cron = "0 0/15 9-13/45 * * *")
-    @Scheduled(fixedDelayString = "PT2s")
+    @Scheduled(cron = "*/1 * 9-20 * * *")
+//    @Scheduled(fixedDelayString = "PT2s")
     //tao ra cac command chay deu 15/lan tu 9h-18h
-    public UserRespond commandAutoBot() {// start va stop thu cong
+    public CommandRespond commandAutoBot() {// start va stop thu cong
         if (allBotPrice == 0){
             return null;
         }else {
@@ -67,7 +67,7 @@ public class AutoBotServiceImpl implements AutobotService {
             Faker faker = new Faker();
             String name = faker.name().fullName();
             if (allBotPrice > (stockNumber * stockPrice)) {
-                userRepository.insertCommand(name, codeStock[random.nextInt(8)], isSale, stockPrice, stockNumber);
+                commandRepository.insertCommand(name, codeStock[random.nextInt(8)], isSale, stockPrice, stockNumber);
                 allBotPrice = realBotPrice;
                 try {
                     Thread.sleep(timeSleep);

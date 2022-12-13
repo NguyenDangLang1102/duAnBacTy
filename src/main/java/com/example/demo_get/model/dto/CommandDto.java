@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class CommandDto {
 private Integer Id;
 private String nameUser;
 private  String nameStock;
