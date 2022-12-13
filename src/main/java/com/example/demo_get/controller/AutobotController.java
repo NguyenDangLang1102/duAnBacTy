@@ -3,6 +3,7 @@ package com.example.demo_get.controller;
 
 import com.example.demo_get.model.in.AutoBotIn;
 import com.example.demo_get.model.in.BotIn;
+import com.example.demo_get.model.in.CreatBotIn;
 import com.example.demo_get.service.AutobotService;
 import com.example.demo_get.service.implement.AutoBotServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,10 @@ public class AutobotController {
     @PostMapping("/insert")
     public ResponseEntity<?> insert(@RequestBody AutoBotIn autoBotIn) {
         return new ResponseEntity<>(autobotService.insert(autoBotIn), HttpStatus.CREATED);
+    }
+    @PostMapping("/creat")
+    public ResponseEntity<?> creatBot(@RequestBody CreatBotIn creatBotIn) {
+        return new ResponseEntity<>(autobotService.creatBot(creatBotIn), HttpStatus.CREATED);
     }
 
 
