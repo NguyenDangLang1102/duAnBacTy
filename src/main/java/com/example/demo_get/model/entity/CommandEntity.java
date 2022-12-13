@@ -1,6 +1,5 @@
 package com.example.demo_get.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +16,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="COMMAND")
 @NamedStoredProcedureQuery(name = "command.getbyid",
-        resultClasses = UserEntity.class,
+        resultClasses = CommandEntity.class,
         procedureName = "PKG_COMMAND_COMPLETE.GET_BY_ID",
         parameters = {
                 @StoredProcedureParameter(mode = ParameterMode.IN,type = Integer.class,name = "p_ID"),
@@ -26,7 +25,7 @@ import java.sql.Timestamp;
 )
 
 
-public class UserEntity {
+public class CommandEntity {
     @Id
     @Column(name = "ID")
     private  Integer Id;

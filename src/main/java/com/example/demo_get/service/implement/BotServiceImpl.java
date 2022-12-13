@@ -2,8 +2,8 @@ package com.example.demo_get.service.implement;
 
 
 import com.example.demo_get.model.in.BotIn;
-import com.example.demo_get.model.respond.UserRespond;
-import com.example.demo_get.repostory.UserRepository;
+import com.example.demo_get.model.respond.CommandRespond;
+import com.example.demo_get.repostory.CommandRepository;
 import com.example.demo_get.service.BotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -27,11 +27,11 @@ public class BotServiceImpl implements BotService {
 
     private static int conditions = 0;
     @Autowired
-    private UserRepository userRepository;
+    private CommandRepository commandRepository;
 
 
     @Override
-    public UserRespond insert(BotIn botIn) {
+    public CommandRespond insert(BotIn botIn) {
         ratioSell= botIn.getRatioSell();
         timeSleep = botIn.getTimeSleep();
         desirStockPrice =botIn.getDesirStockPrice();
@@ -41,7 +41,7 @@ public class BotServiceImpl implements BotService {
 
     @Override
     @Scheduled(fixedDelayString = "PT1s")
-    public UserRespond commandBot() {//ty le mua ban
+    public CommandRespond commandBot() {//ty le mua ban
         if(desirStockPrice == 0) {
             return null;
         } else {
@@ -58,7 +58,7 @@ public class BotServiceImpl implements BotService {
                 for (  int i=  0  ; i <= times ; i ++ ){
                     int stockPrice = desirStockPrice- times + i  ;
                     conditions = i;
-                    userRepository.insertCommand(userName[random.nextInt(4)], "cow", isSale,stockPrice,stockNumber  );
+                    commandRepository.insertCommand(userName[random.nextInt(4)], "cow", isSale,stockPrice,stockNumber  );
                     try {
                         Thread.sleep(timeSleep);
                     } catch (InterruptedException e) {
@@ -67,7 +67,7 @@ public class BotServiceImpl implements BotService {
                 }
             }else {
                 int stockPrice = desirStockPrice ;
-                userRepository.insertCommand(userName[random.nextInt(4)], "cow", isSale,stockPrice,stockNumber  );
+                commandRepository.insertCommand(userName[random.nextInt(4)], "cow", isSale,stockPrice,stockNumber  );
                 try {
                     Thread.sleep(timeSleep);
                 } catch (InterruptedException e) {
