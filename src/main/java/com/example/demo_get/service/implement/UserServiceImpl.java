@@ -8,6 +8,9 @@ import com.example.demo_get.model.respond.UserRespond;
 import com.example.demo_get.repostory.UserRepository;
 import com.example.demo_get.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -16,6 +19,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 @Component
 @Transactional
+
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -144,6 +148,8 @@ public class UserServiceImpl implements UserService {
        UserEntity list =userRepository.getbyid(p_ID);
        return new UserRespond(list, "Success");
     }
+
+
 }
 
 
