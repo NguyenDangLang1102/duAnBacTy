@@ -4,6 +4,7 @@ import com.example.demo_get.model.in.AutoBotIn;
 import com.example.demo_get.model.respond.UserRespond;
 import com.example.demo_get.repostory.UserRepository;
 import com.example.demo_get.service.AutobotService;
+import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -53,14 +54,18 @@ public class AutoBotServiceImpl implements AutobotService {
             return null;
         }else {
             Random random = new Random();
-            String[] userName = {"Trung", "Lang", "Minh", "Huy"};
             String[] codeStock  = {"cow", "pig", "horse", "rooster", "hen","dog","cat","donkey"};
             Boolean isSale = random.nextBoolean();
             int stockPrice = random.nextInt(11) + 20;// random.nextInt(max + 1 - min) + min
             int stockNumber = random.nextInt(maxStockVolume + 1 - minStockVolume) + minStockVolume;
             int realBotPrice = allBotPrice - stockNumber * stockPrice;//so tien con lai
+            Faker faker = new Faker();
+            String name = faker.name().fullName();
+            System.out.println(allBotPrice);
+
             if (allBotPrice > (stockNumber * stockPrice)) {
-                userRepository.insertCommand(userName[random.nextInt(2)], codeStock[random.nextInt(8)], isSale, stockPrice, stockNumber);
+                userRepository.insertCommand(name, codeStock[random.nextInt(8)], isSale, stockPrice, stockNumber);
+                allBotPrice = realBotPrice;
                 try {
                     Thread.sleep(timeSleep);
                 } catch (InterruptedException e) {
@@ -68,6 +73,7 @@ public class AutoBotServiceImpl implements AutobotService {
                 }
                 return null;
             } else {
+                allBotPrice = 0;
                 return null;
             }
         }
