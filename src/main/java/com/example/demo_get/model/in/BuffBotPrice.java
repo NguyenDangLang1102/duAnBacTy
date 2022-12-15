@@ -1,6 +1,5 @@
 package com.example.demo_get.model.in;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,18 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+public class BuffBotPrice {
 
-public class AutoBotIn {
-
-    private Integer timeSleep;
-    private Integer minStockVolume;
-    private Integer maxStockVolume;
-    private Integer fromIndex;
-    private Integer toIndex;
-
-
-
-
-
-
+    private  String stockPrice;
 }

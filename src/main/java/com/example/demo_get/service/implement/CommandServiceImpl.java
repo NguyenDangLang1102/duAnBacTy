@@ -32,6 +32,8 @@ public class CommandServiceImpl implements CommandService {
 
     @Override
     public CommandRespond create(CommandIn CommandIn) {
+        System.out.println("vao Command"+ CommandIn);
+
 //        userRepository.insertCommand(UserIn.getNameUser(),UserIn.getNameStock(),UserIn.getIsSale(),UserIn.getStockPrice(), UserIn.getStockNumber());
         List<CommandEntity>list = commandRepository.getCommand();
         List<CommandDto>listDto=list.stream().map(CommandMapper::mapEntity).collect(Collectors.toList());

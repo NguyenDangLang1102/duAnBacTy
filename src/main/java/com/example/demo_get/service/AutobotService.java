@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface AutobotService {
     CommandRespond insert(AutoBotIn autoBotIn);
-    CommandRespond creatBot(CreatBotIn creatBotIn);
 
     CommandRespond commandAutoBot ();
 

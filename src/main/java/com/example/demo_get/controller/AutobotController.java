@@ -41,10 +41,7 @@ public class AutobotController {
     public ResponseEntity<?> insert(@RequestBody AutoBotIn autoBotIn) {
         return new ResponseEntity<>(autobotService.insert(autoBotIn), HttpStatus.CREATED);
     }
-    @PostMapping("/creat")
-    public ResponseEntity<?> creatBot(@RequestBody CreatBotIn creatBotIn) {
-        return new ResponseEntity<>(autobotService.creatBot(creatBotIn), HttpStatus.CREATED);
-    }
+
 
 
 }

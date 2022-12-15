@@ -1,5 +1,6 @@
 package com.example.demo_get.repostory;
 
+import com.example.demo_get.model.entity.AccountEntity;
 import com.example.demo_get.model.entity.CommandEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -17,6 +18,7 @@ public interface CommandRepository extends JpaRepository <CommandEntity,Integer>
 
     @Procedure(procedureName = "PKG_COMMAND.GET_COMMAND",refCursor = true)
     List<CommandEntity> getCommand();
+
 
     @Modifying
     @Procedure(name = "command.getbyid")
