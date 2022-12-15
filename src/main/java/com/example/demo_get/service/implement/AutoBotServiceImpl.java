@@ -58,24 +58,24 @@ public class AutoBotServiceImpl implements AutobotService {
     }
 
     @Override
-    @Scheduled(cron = "*/5 * 9-15 * * *")
+    @Scheduled(cron = "*/5 * 9-20 * * *")
 //    @Scheduled(fixedDelayString = "PT2s")
     //tao ra cac command chay deu 15/lan tu 9h-18h
     public CommandRespond commandAutoBot() {// start va stop thu cong
-        if ((fromIndex + toIndex ) == 0){
-            return null;
+        if ( toIndex  == 0){
+            return new CommandRespond("if");
         }else {
-            Random random = new Random();
-            String[] codeStock = {"cow", "pig", "horse", "rooster", "hen", "dog", "cat", "donkey"};
-            Boolean isSale = random.nextBoolean();
-            int stockPrice = random.nextInt(11) + 20;// random.nextInt(max + 1 - min) + min
-            int stockNumber = random.nextInt(maxStockVolume + 1 - minStockVolume) + minStockVolume;
-
             List<AccountEntity> list = accountRepository.getAccount();
             List<AccountDto> listDto = list.stream().map(AccountMapper::mapEntity).collect(Collectors.toList());
             List<AccountDto> listAccount = listDto.subList(fromIndex, toIndex);//0-5
-
+            System.out.println("vao day1");
                 for (int i = 0; i < listAccount.size() ; i++) {
+                    Random random = new Random();
+                    String[] codeStock = {"cow", "pig", "horse", "rooster", "hen", "dog", "cat", "donkey"};
+                    Boolean isSale = random.nextBoolean();
+                    int stockPrice = random.nextInt(11) + 20;// random.nextInt(max + 1 - min) + min
+                    int stockNumber = random.nextInt(maxStockVolume + 1 - minStockVolume) + minStockVolume;
+
                     AccountDto account = listAccount.get(i);
                     if (account.getBotPrice() > (stockNumber * stockPrice) ) {
                         commandRepository.insertCommand(account.getNameUser(), codeStock[random.nextInt(8)], isSale, stockPrice, stockNumber);
@@ -89,12 +89,9 @@ public class AutoBotServiceImpl implements AutobotService {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                    }else {
-                        fromIndex = 0;
-                        toIndex= 0;
                     }
                 }
-                    return null;
+                    return new CommandRespond("else");
         }
     }
 }
