@@ -8,6 +8,7 @@ import com.example.demo_get.model.respond.CommandRespond;
 import com.example.demo_get.repostory.CommandRepository;
 import com.example.demo_get.service.CommandService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -18,6 +19,8 @@ import java.util.stream.Collectors;
 @Transactional
 
 public class CommandServiceImpl implements CommandService {
+
+
 
     @Autowired
     private CommandRepository commandRepository;

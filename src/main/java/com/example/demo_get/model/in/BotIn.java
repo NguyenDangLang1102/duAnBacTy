@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -16,7 +18,6 @@ public class BotIn {
     private Integer timeSleep;
     private  Integer desirStockPrice;
     private Integer times;
-
-
-
+    private LocalDateTime timeStart;
+    private LocalDateTime timeStop;
 }

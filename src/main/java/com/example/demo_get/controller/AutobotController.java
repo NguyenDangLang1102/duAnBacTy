@@ -34,7 +34,7 @@ public class AutobotController {
     }
     @GetMapping(value = "/startScheduler")
     public String startSchedule() {
-        postProcessor.postProcessAfterInitialization(autoBotServiceimpl, SCHEDULED_TASKS);
+            postProcessor.postProcessAfterInitialization(autoBotServiceimpl, SCHEDULED_TASKS);
         return  "start auto bot" ;
     }
     @PostMapping("/insert")
@@ -42,6 +42,10 @@ public class AutobotController {
         return new ResponseEntity<>(autobotService.insert(autoBotIn), HttpStatus.CREATED);
     }
 
+    @GetMapping("/test")
+    public ResponseEntity<?> insert() {
+        return new ResponseEntity<>(autobotService.commandAutoBot(), HttpStatus.OK);
+    }
 
 
 }

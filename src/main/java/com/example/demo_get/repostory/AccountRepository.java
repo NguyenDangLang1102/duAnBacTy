@@ -11,7 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
+
 public interface AccountRepository extends JpaRepository<AccountEntity, Integer> {
+    @Transactional(readOnly = true)
     @Procedure(procedureName = "PKG_ACCOUNT.GET_ACCOUNT",refCursor = true)
     List<AccountEntity> getAccount();
 

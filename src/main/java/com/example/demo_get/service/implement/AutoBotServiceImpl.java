@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -58,9 +57,11 @@ public class AutoBotServiceImpl implements AutobotService {
     }
 
     @Override
-    @Scheduled(cron = "*/5 * 9-20 * * *")
-//    @Scheduled(fixedDelayString = "PT2s")
-    //tao ra cac command chay deu 15/lan tu 9h-18h
+    @Scheduled(cron = "* * 9-11 * * 1-5")
+    @Scheduled(cron = "* 0-30 11 * * 1-5")
+    @Scheduled(cron = "* * 11-15 * * 1-5")
+    @Scheduled(fixedDelayString = "PT1s")
+    //tao ra cac command chay deu 15/lan tu 9h-15h
     public CommandRespond commandAutoBot() {// start va stop thu cong
         if ( toIndex  == 0){
             return new CommandRespond("if");
@@ -79,13 +80,13 @@ public class AutoBotServiceImpl implements AutobotService {
                     AccountDto account = listAccount.get(i);
                     if (account.getBotPrice() > (stockNumber * stockPrice) ) {
                         commandRepository.insertCommand(account.getNameUser(), codeStock[random.nextInt(8)], isSale, stockPrice, stockNumber);
-                        //  CommandIn commandIn = new CommandIn(name, codeStock[random.nextInt(8)], stockPrice, isSale, stockNumber);
+                        //  CommandIn commandIn = new CommandIn(name, codeStock[random.nextInt(8)], stockPrice, isSale, stockNumber);// ham khop lenh
                         //    commandService.create(commandIn);
                         int realBotPrice = account.getBotPrice() - stockNumber * stockPrice;//so tien con lai
-                        String realBotPriceString =String.valueOf(realBotPrice);
-                        accountRepository.updateUser(account.getIdBot(),realBotPriceString);
+                        String realBotPriceString =String.valueOf(realBotPrice);// ep kieu theo DB
+                        accountRepository.updateUser(account.getIdBot(),realBotPriceString);//update gia tien
                         try {
-                            Thread.sleep(timeSleep);
+                            Thread.sleep(timeSleep);//tg nghi moi lenh
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
